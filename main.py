@@ -18,7 +18,12 @@ def chebyshev_nodes(n: int = 10) -> np.ndarray | None:
         (np.ndarray): Wektor węzłów Czebyszewa (n,).
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    if not isinstance(n, int):
+        return None
+    if n<=1:
+        return None    
+    
+    return (np.cos((np.arange(n)*np.pi)/(n-1)))
 
 
 def bar_cheb_weights(n: int = 10) -> np.ndarray | None:
@@ -31,7 +36,13 @@ def bar_cheb_weights(n: int = 10) -> np.ndarray | None:
         (np.ndarray): Wektor wag dla węzłów Czebyszewa (n,).
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    if not isinstance(n, int):
+        return None
+    if n<=0:
+        return None  
+    
+    delta = np.concatenate(([0.5],[1 for i in range(n-2)],[0.5]))
+    return delta*[(-1)**j for j in range(n)]
 
 
 def barycentric_inte(
@@ -71,4 +82,10 @@ def L_inf(
         (float): Wartość normy L-nieskończoność.
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    if not isinstance(xr, int | float | list | np.ndarray):
+        return None
+    if not isinstance(x, int | float | list | np.ndarray):
+        return None
+    
+    return np.max(np.abs(np.array(x)-np.array(xr)))
+
